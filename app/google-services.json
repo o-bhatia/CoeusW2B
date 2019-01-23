@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "221319789269",
+    "firebase_url": "https://coeusreader-ad8be.firebaseio.com",
+    "project_id": "coeusreader-ad8be",
+    "storage_bucket": "coeusreader-ad8be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:221319789269:android:0db863b91fb8f756",
+        "android_client_info": {
+          "package_name": "com.example.coeus.coeus_writetobyte"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "221319789269-ulv2ntd8u9e0h5j1j7espug0snv3lm7f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCszh0R7ZU-5Dgwb7FHw0SDUdvXdWdEtKM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

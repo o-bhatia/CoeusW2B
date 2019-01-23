@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/home"
+            android:title="@string/nav_home" />
+        <item
+            android:id="@+id/nav_my_files"
+            android:icon="@drawable/files"
+            android:title="@string/nav_files" />
+        <item
+            android:id="@+id/nav_scanner"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="@string/nav_scanner" />
+        <item
+            android:id="@+id/nav_user_preferences"
+            android:icon="@drawable/settings"
+            android:title="@string/nav_user_preferences" />
+        <item
+            android:id="@+id/nav_what_is_new"
+            android:icon="@drawable/share"
+            android:title="@string/nav_new" />
+        <item
+            android:id="@+id/nav_log_out"
+            android:title="Log Out" />
+    </group>
+</menu>

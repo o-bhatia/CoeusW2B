@@ -1,0 +1,184 @@
+<resources>
+    <string name="app_name">Coeus</string>
+    <string name="coeusMainPage">Coeus</string>
+    <string name="todo">TODO</string>
+    <string name="userNameMain">Username</string>
+    <string name="emailMainPage">Email</string>
+    <string name="stringIconMain">TODO</string>
+    <string name="messageMain"><![CDATA[<< Swipe Left to Scan Document]]></string>
+    <string name="title_activity_tabular_menu">TabularMenuActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_nav_drawer">NavDrawerActivity</string>
+    <string name="title_activity_main_nav_drawer">MainNavDrawer</string>
+    <string name="title_activity_whats_new">WhatsNew</string>
+
+    <!-- Strings related to Settings -->
+
+    <!-- Example General settings -->
+    <string name="pref_header_general">General</string>
+
+    <string name="pref_title_social_recommendations">Enable Sharing</string>
+    <string name="pref_description_social_recommendations">Upload and share to Google Drive
+    </string>
+
+    <string name="pref_title_display_name">Username</string>
+    <string name="pref_default_display_name">John Smith</string>
+
+    <string name="pref_title_add_friends_to_messages">Text Size</string>
+
+    <!-- String arrays of the Application -->
+    <string-array name="pref_example_list_titles">
+        <item>Always</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+
+    <string-array name="pref_example_list_values">
+        <item>1</item>
+        <item>0</item>
+        <item>-1</item>
+    </string-array>
+
+    <!-- Example settings for Data & Sync -->
+    <string name="pref_header_data_sync">Data &amp; sync</string>
+
+    <string name="pref_title_sync_frequency">Sync frequency</string>
+
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>3 hours</item>
+        <item>6 hours</item>
+        <item>Never</item>
+    </string-array>
+
+    <string-array name="pref_sync_frequency_values">
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>180</item>
+        <item>360</item>
+        <item>-1</item>
+    </string-array>
+
+    <string-array name="list_preference_entries">
+        <item>Entry 1</item>
+        <item>Entry 2</item>
+        <item>Entry 3</item>
+    </string-array>
+
+    <string-array name="list_preference_entry_values">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="multi_select_list_preference_default_value" />
+
+    <!-- User Preference screen Font spinner items -->
+    <string-array name="fonts_array">
+        <item>Times New Roman</item>
+        <item>Courier</item>
+        <item>Helvetica</item>
+    </string-array>
+
+    <!-- User Preference screen text size spinner items -->
+    <string-array name="text_sizes_array">
+        <item>10</item>
+        <item>12</item>
+        <item>14</item>
+    </string-array>
+
+    <!-- User Preference screen document type spinner items -->
+    <string-array name="document_types_array">
+        <item>PDF</item>
+        <item>JPEG</item>
+        <item>PNG</item>
+        <item>TXT</item>
+    </string-array>
+
+    <!-- My Files screen document type spinner items -->
+    <string-array name="sort_types_array">
+        <item>Sort by:</item>
+        <item>A - Z</item>
+        <item>Date</item>
+    </string-array>
+
+
+    <string name="pref_title_system_sync_settings">System sync settings</string>
+
+    <!-- Example settings for Notifications -->
+    <string name="pref_header_notifications">Notifications</string>
+
+    <string name="pref_title_new_message_notifications">New message notifications</string>
+
+    <string name="pref_title_ringtone">Ringtone</string>
+    <string name="pref_ringtone_silent">Silent</string>
+
+    <string name="pref_title_vibrate">Vibrate</string>
+
+    <!-- User Preferences screen strings -->
+    <string name="user_settings">User Settings</string>
+    <string name="my_account">My Account</string>
+    <string name="default_location">Default Location</string>
+    <string name="export_preferences">Export Preferences</string>
+    <string name="font">Font</string>
+    <string name="text_size">Text Size</string>
+    <string name="document_type">Document Type</string>
+
+    <!-- Navigation Drawer related strings -->
+
+    <!-- Navigation Drawer menu items -->
+    <string name="nav_home">Home</string>
+    <string name="nav_scanner">Scanner</string>
+    <string name="nav_files">My Files</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_about">About Us</string>
+    <string name="nav_new">What\'s New</string>
+    <string name="nav_share">Share</string>
+    <string name="nav_user_preferences">User Preferences</string>
+
+    <string name="title_activity_settings">Settings</string>
+    <string name="navigation_drawer_title">Choose preferred screen</string>
+
+    <!-- Login screen strings -->
+    <string name="sign_in">Sign in</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Scanner screen strings -->
+    <string name="take_picture">Take picture</string>
+    <string name="done">Done</string>
+
+    <!-- Editing screen strings -->
+    <string name="your_scanned_doc">Your Scanned Document</string>
+    <string name="font_style">Font:</string>
+    <string name="font_size">Text Size:</string>
+    <string name="save_to">Save to:</string>
+    <string name="pdf">pdf</string>
+    <string name="png">png</string>
+    <string name="docx">docx</string>
+    <string name="jpeg">jpeg</string>
+    <string name="times">Times New Roman</string>
+    <string name="helvet">Helvetica</string>
+    <string name="calibri">Calibri</string>
+    <string name="sp11">10 sp</string>
+    <string name="sp12">12 sp</string>
+    <string name="sp13">14 sp</string>
+    <string name="file_location">File location</string>
+    <string name="drive">Drive</string>
+    <string name="choose_something">Please, choose file format and destination</string>
+
+    <!-- MyFiles screen strings -->
+    <string name="file_name">File Name</string>
+    <string name="date_created">Date Created</string>
+    <string name="select_all">Select All</string>
+
+</resources>
