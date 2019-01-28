@@ -18,7 +18,7 @@ import android.widget.Toast;
 import com.example.coeus.coeus_writetobyte.R;
 import com.example.coeus.coeus_writetobyte.fragments.ScannerFragment;
 import com.example.coeus.coeus_writetobyte.managers.PreferenceManager;
-import com.example.coeus.coeus_writetobyte.models.GMailUser;
+import com.example.coeus.coeus_writetobyte.models.GmailUser;
 import com.example.coeus.coeus_writetobyte.realm.ScannedDataFile;
 import com.example.coeus.coeus_writetobyte.utils.ImageHelper;
 import com.tom_roush.pdfbox.pdmodel.font.PDFont;
@@ -34,8 +34,20 @@ import io.realm.Realm;
 import proccessingPackage.CreatePDF;
 import proccessingPackage.IO;
 
+/**
+ * Description: This class contains all methods that define the
+ * Editing Activity. It also contains the method to get user OCR
+ * preferences (font and text size).
+ *
+ * Author: Ojas Bhatia and Aumio Islam
+ *
+ * Last updated: January 10, 2019
+ */
+
+
 public class EditingActivity extends AppCompatActivity {
 
+    //declaring variables and objects used within this class
     private String capturedImagePath;
     private Realm realm;
     String visionText = null;
@@ -47,35 +59,45 @@ public class EditingActivity extends AppCompatActivity {
     Spinner fontsSpinner;
     Bitmap capturedImage;
 
+    //onCreate method handles the declaration of all necessary elements of Editing Activity
+    //when it is opened
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editing);
 
+        //realm object initialized
         realm = Realm.getDefaultInstance();
 
+        //displaying captured image in frame
         showCapturedImage();
 
-        GMailUser gMailUser = PreferenceManager.loadObject(this);
+        //displaying user email on Editing screen
+        GmailUser gMailUser = PreferenceManager.loadObject(this);
         String personEmail = gMailUser.getPersonEmail();
         TextView emailTextView = findViewById(R.id.email);
         emailTextView.setText(personEmail);
 
+        //calling CloudVision class to scan text
         visionText = getVisionText();
 
         Log.d("Vision", "(2) Text read:\n" + visionText);
 
+        //editing title of document
         fileNameEditText = findViewById(R.id.title);
         fileNameEditText.setSingleLine(true);
 
+        //initializing spinners to choose font and text size
         initSpinners();
 
+        //setting Done button
         Button doneButton = findViewById(R.id.done);
         doneButton.setOnClickListener(doneButtonClickListener);
 
     }
 
+    //method displays captured image (scaled version) in blank frame
     private void showCapturedImage() {
 
         Intent incomingIntent = getIntent();
@@ -86,6 +108,7 @@ public class EditingActivity extends AppCompatActivity {
         showPictureImageView.setImageBitmap(Bitmap.createScaledBitmap(capturedImage, 200, 200, false));
 
     }
+
 
     private String getVisionText() {
 
@@ -158,22 +181,25 @@ public class EditingActivity extends AppCompatActivity {
 
     };
 
+    //method calls methods of spinners to initialize them
     private void initSpinners(){
         initFontsSpinner();
         initTextSizesSpinner();
 
     }
 
+    //method initializes fonts spinner
     private void initFontsSpinner(){
 
         fontsSpinner = findViewById(R.id.spinner_font);
-        // Create an ArrayAdapter using the string array and a default spinner layout
+        //Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> fontsAdapter = ArrayAdapter.createFromResource(getApplicationContext(),
                 R.array.fonts_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
+        //Specify the layout to use when the list of choices appears
         fontsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
+        //Apply the adapter to the spinner
         fontsSpinner.setAdapter(fontsAdapter);
+        //setting default position of spinner to 0 (first choice is Times New Roman)
         fontsSpinner.setSelection(DEFAULT_POSITION);
 
         AdapterView.OnItemSelectedListener fontsItemSelectedListener = new AdapterView.OnItemSelectedListener() {
@@ -188,20 +214,23 @@ public class EditingActivity extends AppCompatActivity {
             }
         };
 
+        //adding selection listener
         fontsSpinner.setOnItemSelectedListener(fontsItemSelectedListener);
 
     }
 
+    //method initializes text sizes spinner
     private void initTextSizesSpinner(){
 
         textSizesSpinner = findViewById(R.id.spinner_text_size);
-        // Create an ArrayAdapter using the string array and a default spinner layout
+        //Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> textSizesAdapter = ArrayAdapter.createFromResource(getApplicationContext(),
                 R.array.text_sizes_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
+        //Specify the layout to use when the list of choices appears
         textSizesAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
+        //Apply the adapter to the spinner
         textSizesSpinner.setAdapter(textSizesAdapter);
+        //setting default position to 1 (second choice is 10 sp)
         textSizesSpinner.setSelection(DEFAULT_POSITION + 1);
 
         AdapterView.OnItemSelectedListener textSizesItemSelectedListener = new AdapterView.OnItemSelectedListener() {
@@ -216,6 +245,7 @@ public class EditingActivity extends AppCompatActivity {
             }
         };
 
+        //adding selection listener
         textSizesSpinner.setOnItemSelectedListener(textSizesItemSelectedListener);
 
     }

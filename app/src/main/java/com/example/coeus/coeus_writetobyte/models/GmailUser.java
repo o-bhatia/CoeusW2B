@@ -4,7 +4,18 @@ import android.net.Uri;
 
 import java.io.Serializable;
 
-public class GMailUser implements Serializable {
+/**
+ * Description: This class contains accessors and mutators
+ * used for the GmailUser object.
+ *
+ * Author: Ojas Bhatia
+ *
+ * Last updated: January 10, 2019
+ */
+
+public class GmailUser implements Serializable {
+
+   //declaring Strings associated with each logged in user
     private String personName;
     private String personGivenName;
     private String personFamilyName;
@@ -13,7 +24,8 @@ public class GMailUser implements Serializable {
 
     private String uriString;
 
-    public GMailUser(String personName, String personGivenName, String personFamilyName, String personEmail, String personId,
+    //constructor
+    public GmailUser(String personName, String personGivenName, String personFamilyName, String personEmail, String personId,
                      String uriString) {
         this.personName = personName;
         this.personGivenName = personGivenName;
@@ -22,6 +34,8 @@ public class GMailUser implements Serializable {
         this.personId = personId;
         this.uriString = uriString;
     }
+
+    //all accessors and mutators are below (not commented due to redundancy)
 
     public String getPersonName() {
         return personName;

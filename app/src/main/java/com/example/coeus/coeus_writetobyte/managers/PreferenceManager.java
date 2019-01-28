@@ -3,7 +3,7 @@ package com.example.coeus.coeus_writetobyte.managers;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.coeus.coeus_writetobyte.models.GMailUser;
+import com.example.coeus.coeus_writetobyte.models.GmailUser;
 import com.google.gson.Gson;
 
 
@@ -23,11 +23,11 @@ public final class PreferenceManager {
         prefsEditor.apply();
     }
 
-    public static GMailUser loadObject(Context context) {
+    public static GmailUser loadObject(Context context) {
         Gson gson = new Gson();
         SharedPreferences sharedPreferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
         String json  = sharedPreferences.getString(OBJECT_KEY, "");
-        return gson.fromJson(json, GMailUser.class);
+        return gson.fromJson(json, GmailUser.class);
     }
 
     public static void saveFilesCount(Context context, int count) {

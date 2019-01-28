@@ -45,6 +45,7 @@ import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 
 public class MyFilesFragment extends Fragment {
 
+    //declaring strings associated with user profile picture
     private static final String PHOTO_URI_STRING = "photoUriString";
 
     private String photoUriString;
@@ -54,6 +55,7 @@ public class MyFilesFragment extends Fragment {
     //realm object is instantiated to store the file info
     private Realm realm;
     private RecyclerView filesInfoRecyclerView;
+
     //filesInfodapter is instantiated to display previously scanned files
     private FilesInfoAdapter filesInfodapter;
     private RecyclerView.LayoutManager filesInfoLayoutManager;
@@ -97,17 +99,17 @@ public class MyFilesFragment extends Fragment {
 
         super.onViewCreated(view, savedInstanceState);
 
-        realm = Realm.getDefaultInstance();
+        realm = Realm.getDefaultInstance(); //initialize realm object
         filesInfoRecyclerView = view.findViewById(R.id.files_recycler_view);
         setUpRecycleView(view.getContext());
         setUserDataToView(view);
         initSortSpinner();
         FloatingActionButton openMyFilesButton = view.findViewById(R.id.open_my_files);
-        openMyFilesButton.setOnClickListener(openMyFilesClickListener);
+        openMyFilesButton.setOnClickListener(openMyFilesClickListener); //setting onclick listener to view button
 
     }
 
-    //this method is called when the MyFiles fragment is associated with
+    //this public method is called when the MyFiles fragment is associated with
     //the running activity (i.e. it "attaches" to the running activity)
     @Override
     public void onAttach(Context context) {
@@ -128,7 +130,7 @@ public class MyFilesFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    //this private method establishes the view for MyFiles
+    //this private method establishes the view for MyFiles;
     //RecyclerView is chosen because it is dynamic
     private void setUpRecycleView(Context context) {
 
@@ -209,7 +211,7 @@ public class MyFilesFragment extends Fragment {
     }
 
     View.OnClickListener openMyFilesClickListener = v -> {
-        openFiles();
+        openFiles(); //when view button is pressed, call openFiles method
     };
 
     //this public method deals with opening Files app when the user presses

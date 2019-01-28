@@ -14,7 +14,8 @@ import io.realm.Realm;
  * Description: This is the Main class for Coeus, run
  * everytime an instance of the app is created. It contains
  * the onCreate method for Coeus and initializes the realm.io
- * database.
+ * database. Note: we did not comment the XML files since it
+ * is redundant and unnecessary.
  *
  * Authors: Ojas Bhatia and Aumio Islam
  *

@@ -22,6 +22,15 @@ import com.example.coeus.coeus_writetobyte.R;
 
 import java.util.List;
 
+/**
+ * Description: This class contains methods that deal with
+ * device and user settings, such as checking user device size.
+ *
+ * Author: Ojas Bhatia
+ *
+ * Last updated: January 10, 2019
+ */
+
 public class SettingsActivity extends AppCompatPreferenceActivity {
 
     /**
@@ -46,10 +55,10 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                                 : null);
 
             } else if (preference instanceof RingtonePreference) {
-                // For ringtone preferences, look up the correct display value
-                // using RingtoneManager.
+                //For ringtone preferences, look up the correct display value
+                //using RingtoneManager.
                 if (TextUtils.isEmpty(stringValue)) {
-                    // Empty values correspond to 'silent' (no ringtone).
+                    //Empty values correspond to 'silent' (no ringtone).
                     preference.setSummary(R.string.pref_ringtone_silent);
 
                 } else {
@@ -57,11 +66,11 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                             preference.getContext(), Uri.parse(stringValue));
 
                     if (ringtone == null) {
-                        // Clear the summary if there was a lookup error.
+                        //Clear the summary if there was a lookup error.
                         preference.setSummary(null);
                     } else {
-                        // Set the summary to reflect the new ringtone display
-                        // name.
+                        //Set the summary to reflect the new ringtone display
+                        //name.
                         String name = ringtone.getTitle(preference.getContext());
                         preference.setSummary(name);
                     }
@@ -76,10 +85,7 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
     };
 
-    /**
-     * Helper method to determine if the device has an extra-large screen. For
-     * example, 10" tablets are extra-large.
-     */
+    //method to determine if device is extra large (10" and higher would be XL)
     private static boolean isXLargeTablet(Context context)
 
     {
@@ -95,8 +101,6 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
      * preference title) is updated to reflect the value. The summary is also
      * immediately updated upon calling this method. The exact display format is
      * dependent on the type of preference.
-     *
-     * @see #sBindPreferenceSummaryToValueListener
      */
     private static void bindPreferenceSummaryToValue(Preference preference) {
         // Set the listener to watch for value changes.
@@ -110,15 +114,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                         .getString(preference.getKey(), ""));
     }
 
+    //onCreate method sets up Action Bar in Coeus by calling setupActionBar method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
     }
 
-    /**
-     * Set up the {@link android.app.ActionBar}, if the API is available.
-     */
+    //method sets up ActionBar if API level is higher than 21
     private void setupActionBar() {
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -127,27 +130,20 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    //method deals with device size
     @Override
     public boolean onIsMultiPane() {
         return isXLargeTablet(this);
     }
 
-    /**
-     * {@inheritDoc}
-     */
+   //method builds app headers and titles according to device API
     @Override
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     public void onBuildHeaders(List<Header> target) {
         loadHeadersFromResource(R.xml.pref_headers, target);
     }
 
-    /**
-     * This method stops fragment injection in malicious applications.
-     * Make sure to deny any unknown fragments here.
-     */
+    //method stops fragment injection in malicious applications.
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName)
                 || GeneralPreferenceFragment.class.getName().equals(fragmentName)
@@ -167,14 +163,15 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_general);
             setHasOptionsMenu(true);
 
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
+            //Bind the summaries of EditText/List/Dialog/Ringtone preferences
+            //to their values. When their values change, their summaries are
+            //updated to reflect the new value, per the Android Design
+            //guidelines.
             bindPreferenceSummaryToValue(findPreference("example_text"));
             bindPreferenceSummaryToValue(findPreference("example_list"));
         }
 
+        //menu returns menu item selected, if home, launch activity
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
@@ -198,13 +195,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_notification);
             setHasOptionsMenu(true);
 
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
+            //Bind the summaries of EditText/List/Dialog/Ringtone preferences
+            //to their values. When their values change, their summaries are
+            //updated to reflect the new value, per the Android Design
+            //guidelines.
             bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
         }
 
+        //menu returns menu item selected, if home, launch activity
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();
@@ -228,13 +226,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_data_sync);
             setHasOptionsMenu(true);
 
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
+            //Bind the summaries of EditText/List/Dialog/Ringtone preferences
+            //to their values. When their values change, their summaries are
+            //updated to reflect the new value, per the Android Design
+            //guidelines.
             bindPreferenceSummaryToValue(findPreference("sync_frequency"));
         }
 
+        //menu returns menu item selected, if home, launch activity
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
             int id = item.getItemId();

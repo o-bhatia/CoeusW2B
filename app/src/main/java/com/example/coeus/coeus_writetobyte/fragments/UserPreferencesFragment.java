@@ -19,17 +19,19 @@ import com.example.coeus.coeus_writetobyte.activities.MainActivity;
 import com.example.coeus.coeus_writetobyte.utils.GlideApp;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link UserPreferencesFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link UserPreferencesFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Description: This class defines all methods associated with the UserPreferences fragment.
+ *
+ * Author: Ojas Bhatia
+ *
+ * Date: January 10, 2019
  */
+
 public class UserPreferencesFragment extends Fragment {
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
+    //fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String PHOTO_URI_STRING = "photoUriString";
 
+    //declaring components of UserPreferencesFragment
     private String photoUriString;
 
     private OnFragmentInteractionListener mListener;
@@ -39,7 +41,7 @@ public class UserPreferencesFragment extends Fragment {
     }
 
     /**
-     * Use this factory method to create a new instance of
+     * Factory method creates a new instance of
      * this fragment using the provided parameters.
      *
      * @param photoUriString Parameter 1.
@@ -53,14 +55,18 @@ public class UserPreferencesFragment extends Fragment {
         return fragment;
     }
 
+    //onCreate method called after newInstance method
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //checks if there are arguments for initialization
         if (getArguments() != null) {
             photoUriString = getArguments().getString(PHOTO_URI_STRING);
         }
     }
 
+    //method initializes spinners and displays user Google profile info
+    //(name, email, profile picture)
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -72,7 +78,8 @@ public class UserPreferencesFragment extends Fragment {
         TextView userNameEmail = getView().findViewById(R.id.email);
         userNameEmail.setText(MainActivity.personEmail);
 
-        if ( ( photoUriString != null ) && !photoUriString.isEmpty()) {
+        //displays user's profile picture (if there is one); else displays default Mat. Design icon
+        if ((photoUriString != null) && !photoUriString.isEmpty()) {
 
             ImageView profilePhotoImageView = getView().findViewById(R.id.profile_photo);
             GlideApp.with(this)
@@ -85,64 +92,45 @@ public class UserPreferencesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        //Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_user_preferences, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
+    //onAttach must be called to associate fragment with running activity
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
     }
 
+    //onDetach must be called to dissociate fragment with running activity
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    //declaring interface with action listener
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
+    //method initializes all spinners (drop down menus) by calling each spinner's respective method
     private void initSpinners(){
         initFontsSpinner();
         initTextSizesSpinner();
         initDocumentTypesSpinner();
     }
 
+    //method initializes fonts spinner
     private void initFontsSpinner(){
 
         Spinner fontsSpinner = getView().findViewById(R.id.spinner_font);
-        // Create an ArrayAdapter using the string array and a default spinner layout
+        //Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> fontsAdapter = ArrayAdapter.createFromResource(getContext(),
                 R.array.fonts_array, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
+        //Specify the layout to use when the list of choices appears
         fontsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
+        //Apply the adapter to the spinner
         fontsSpinner.setAdapter(fontsAdapter);
 
         AdapterView.OnItemSelectedListener fontsItemSelectedListener = new AdapterView.OnItemSelectedListener() {
@@ -157,10 +145,12 @@ public class UserPreferencesFragment extends Fragment {
             }
         };
 
+        //adding selection listener
         fontsSpinner.setOnItemSelectedListener(fontsItemSelectedListener);
 
     }
 
+    //method initializes text sizes spinner
     private void initTextSizesSpinner(){
 
         Spinner textSizesSpinner = getView().findViewById(R.id.spinner_text_size);
@@ -184,10 +174,12 @@ public class UserPreferencesFragment extends Fragment {
             }
         };
 
+        //adding selection listener
         textSizesSpinner.setOnItemSelectedListener(textSizesItemSelectedListener);
 
     }
 
+    //method initializes document types spinner
     private void initDocumentTypesSpinner(){
 
         Spinner documentTypesSpinner = getView().findViewById(R.id.spinner_document_type);
@@ -211,6 +203,7 @@ public class UserPreferencesFragment extends Fragment {
             }
         };
 
+        //adding selection listener
         documentTypesSpinner.setOnItemSelectedListener(documentTypesItemSelectedListener);
 
     }

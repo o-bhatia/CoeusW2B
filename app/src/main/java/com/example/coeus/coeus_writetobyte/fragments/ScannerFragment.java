@@ -22,8 +22,6 @@ import android.widget.ImageView;
 import com.example.coeus.coeus_writetobyte.R;
 import com.example.coeus.coeus_writetobyte.activities.EditingActivity;
 import com.example.coeus.coeus_writetobyte.utils.ImageHelper;
-import com.tom_roush.pdfbox.pdmodel.font.PDType1Font;
-import com.tom_roush.pdfbox.util.PDFBoxResourceLoader;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,37 +31,37 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import proccessingPackage.IO;
-import proccessingPackage.IO.*;
 import proccessingPackage.CloudVision;
-import proccessingPackage.CreatePDF;
 
 import static android.app.Activity.RESULT_OK;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link OnScannerFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ScannerFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Description: This class defines all methods associated with the Scanner fragment.
+ *
+ * Author: Ojas Bhatia
+ *
+ * Date: January 10, 2019
  */
+
 public class ScannerFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
     public static final String EXTRA_IMAGE_PATH = "extraImagePath";
 
+    //declaring constants to open other activities
     public static final int EDITING_SCREEN_REQUEST_CODE = 0;
     public static final int CAMERA_REQUEST_CODE = 1;
 
+    //declaring buttons and imageviews to be displayed on Scanner fragment
     private Button captureButton;
     private ImageView showPictureImageView;
     private Bitmap capturedImage;
     private Bitmap compressedImage;
 
-    // TODO: Rename and change types of parameters
+   //declaring parameters for Scanner fragment
     private String mParam1;
     private String mParam2;
     String visionText = null;
@@ -75,16 +73,14 @@ public class ScannerFragment extends Fragment {
         // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
+    //newInstance method called when Fragment is created
     public static ScannerFragment newInstance() {
         ScannerFragment fragment = new ScannerFragment();
         Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-//        fragment.setArguments(args);
         return fragment;
     }
 
+    //onCreate has to be called after newInstance (takes parameters of fragment to create it)
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,13 +97,8 @@ public class ScannerFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_scanner, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (scannerFragmentInteractionListener != null) {
-//            scannerFragmentInteractionListener.onScannerFragmentInteraction(uri);
-        }
-    }
-
+   //method contains createImageFile function which stores the date, title and filepath of the image taken
+   //and allows user to take picture
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -115,6 +106,7 @@ public class ScannerFragment extends Fragment {
         captureButton = view.findViewById(R.id.capture_button);
         captureButton.setOnClickListener(new View.OnClickListener() {
 
+            //function creates
             private File createImageFile() throws IOException {
                 // Create an image file name
                 String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
@@ -129,41 +121,47 @@ public class ScannerFragment extends Fragment {
                 // Save a file: path for use with ACTION_VIEW intents
                 mCurrentPhotoPath = image.getAbsolutePath();
                 Log.d("Aumio", mCurrentPhotoPath);
-                return image;
+                return image; //returns created file
             }
 
+            //method contains conditional statements to allow the user to take a picture and proceed to Editing activity
             @Override
             public void onClick(View view) {
 
                 String captureButtonText = captureButton.getText().toString();
 
+                //if button is Take Picture button, the user will be allowed to take a picture
                 if (captureButtonText.equals(getString(R.string.take_picture))) {
 
                     Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     if (takePicture.resolveActivity(getContext().getPackageManager()) != null) {
-                        // Create the File where the photo should go
+                        //Create the File where the photo should go
                         File photoFile = null;
                         try {
                             photoFile = createImageFile();
                         } catch (IOException ex) {
-                            // Error occurred while creating the File
+                            //Error occurred while creating the File
                         }
-                        // Continue only if the File was successfully created
+                        //Continue only if the File was successfully created
                         if (photoFile != null) {
+                            //must declare authority in order to generate Uri to take picture
                             Uri photoURI = FileProvider.getUriForFile(getContext(),
                                     "com.example.coeus.coeus_writetobyte.myfileprovider",
                                     photoFile);
                             File f = new File(mCurrentPhotoPath);
                             Log.d("File", Long.toString(f.length()));
                             takePicture.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                            //when blank file is created, the Camera intent is started
                             startActivityForResult(takePicture, CAMERA_REQUEST_CODE);
 
-                            //Log.d("PATH", photoURI.getPath());
                         }
 
                     }
 
-                } else if (captureButtonText.equals(getString(R.string.done))) {
+                }
+
+                //if button is Done button, Coeus will proceed to Editing activity
+                else if (captureButtonText.equals(getString(R.string.done))) {
 
                     ImageHelper imageHelper = new ImageHelper(getContext());
                     String timestamp = String.valueOf(System.currentTimeMillis());
@@ -184,15 +182,16 @@ public class ScannerFragment extends Fragment {
 
         });
 
+        //display image in frame
         showPictureImageView = view.findViewById(R.id.show_picture_image_view);
         showPictureImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // do something when user click to captured image
             }
         });
     }
 
+    //onAttach must be called to associate fragment with running activity
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -204,57 +203,38 @@ public class ScannerFragment extends Fragment {
         }
     }
 
+    //onDetach must be called to dissociate fragment with running activity
     @Override
     public void onDetach() {
         super.onDetach();
         scannerFragmentInteractionListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    //method sets up interactive interface
     public interface OnScannerFragmentInteractionListener {
         void onScannerFragmentInteraction();
     }
 
+    //method creates ByteStream using bitmap file path (if request code == 1) or
+    //opens Editing screen if request code == 0
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
 
-//            if (mCurrentPhotoPath != null) {
-//
-//                try {
-//                    InputStream is = new FileInputStream(mCurrentPhotoPath);
-//                    byte[] inputData = IO.getBytes(is);
-//                    visionText = CloudVision.readText(inputData, true, this.getContext());
-//                    Log.d("Vision2", visionText);
-//
-//
-//                } catch (IOException e) {
-//                    e.printStackTrace();
-//                }
-//
-//            }
-
             if (requestCode == CAMERA_REQUEST_CODE) {
 
                 if (mCurrentPhotoPath != null) {
 
                 try {
-                    InputStream is = new FileInputStream(mCurrentPhotoPath);
-                    byte[] inputData = IO.getBytes(is);
-                    is.close();
+                    InputStream stream = new FileInputStream(mCurrentPhotoPath);
+                    byte[] inputData = IO.getBytes(stream);
+                    //creating ByteStream from taken image
+                    stream.close();
                     capturedImage = BitmapFactory.decodeByteArray(inputData, 0, inputData.length);
 
+                    //if an image was taken, change Button text and create scaled bitmap (to be displayed)
                     if (capturedImage != null) {
                         compressedImage = Bitmap.createScaledBitmap(capturedImage, 200, 200, false);
                         showPictureImageView.setImageBitmap(compressedImage);
@@ -265,24 +245,20 @@ public class ScannerFragment extends Fragment {
                     }
 
 
-                } catch (IOException e) {
+                }
+
+                catch (IOException e) {
                     e.printStackTrace();
                 }
 
-            }
-//                Bundle bundle = data.getExtras();
-//                if (bundle != null) {
-//                    capturedImage = (Bitmap) bundle.get("data");
-//                    if (capturedImage != null) {
-//                        showPictureImageView.setImageBitmap(Bitmap.createScaledBitmap(capturedImage, 200, 200, false));
-//                        captureButton.setText(R.string.done);
-//                        visionText = CloudVision.readText(capturedImage, true, this.getContext());
-//                        Log.d("Vision", visionText);
-//                        Log.d("Vision", "finished");
-//                    }
                 }
 
-            } else if (requestCode == EDITING_SCREEN_REQUEST_CODE) {
+            }
+
+            }
+
+            //condition opens Editing screen if request code == 0
+            else if (requestCode == EDITING_SCREEN_REQUEST_CODE) {
                 scannerFragmentInteractionListener.onScannerFragmentInteraction();
             }
 

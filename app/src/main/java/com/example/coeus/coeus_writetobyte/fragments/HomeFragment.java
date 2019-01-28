@@ -16,21 +16,32 @@ import com.example.coeus.coeus_writetobyte.R;
 import com.example.coeus.coeus_writetobyte.activities.MainActivity;
 import com.example.coeus.coeus_writetobyte.utils.GlideApp;
 
+/**
+ * Description: This class defines all methods associated with the Home fragment.
+ *
+ * Author: Ojas Bhatia
+ *
+ * Date: January 10, 2019
+ */
 
 public class HomeFragment extends Fragment {
 
+    //declaring components for home fragment
+
+    //arguments for initialization and display of user profile picture
     private static final String PHOTO_URI_STRING = "photoUriString";
 
     private String photoUriString;
 
+    //interaction listener
     private OnFragmentInteractionListener mListener;
 
     public HomeFragment() {
-        // Required empty public constructor
+        //Required empty public constructor
     }
 
     /**
-     * Use this factory method to create a new instance of
+     * Factory method creates a new instance of
      * this fragment using the provided parameters.
      *
      * @param photoUriString Parameter 1.
@@ -43,9 +54,9 @@ public class HomeFragment extends Fragment {
         args.putString(PHOTO_URI_STRING, photoUriString);
         fragment.setArguments(args);
         return fragment;
-
     }
 
+    //onCreate method called after newInstance (gets arguments)
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -63,13 +74,7 @@ public class HomeFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_home, container, false);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
+    //method calls method which user data to Home view
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
@@ -78,7 +83,10 @@ public class HomeFragment extends Fragment {
 
     }
 
+    //method sets user Google info (name, email, photo) to Home page
     private void setUserDataToView(View view) {
+
+        //setting user data TextViews
 
         TextView userNameTextView = view.findViewById(R.id.username);
         userNameTextView.setText(MainActivity.personName);
@@ -86,7 +94,9 @@ public class HomeFragment extends Fragment {
         TextView userNameEmail = view.findViewById(R.id.email);
         userNameEmail.setText(MainActivity.personEmail);
 
-        if ( ( photoUriString != null ) && !photoUriString.isEmpty()) {
+        //if user has a Google profile pic, it is displayed;
+        //else, the default Mat. Design icon is displayed
+        if ((photoUriString != null ) && !photoUriString.isEmpty()) {
 
             ImageView profilePhotoImageView = view.findViewById(R.id.profile_photo);
             GlideApp.with(this)
@@ -96,33 +106,20 @@ public class HomeFragment extends Fragment {
 
     }
 
+    //onAttach must be called to associate fragment with running activity
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
     }
 
+    //onDetach must be called to dissociate fragment with running activity
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    //declaring interface
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
