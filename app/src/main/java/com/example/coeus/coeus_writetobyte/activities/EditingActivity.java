@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -17,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.coeus.coeus_writetobyte.R;
-import com.example.coeus.coeus_writetobyte.fragments.MyFilesFragment;
 import com.example.coeus.coeus_writetobyte.fragments.ScannerFragment;
 import com.example.coeus.coeus_writetobyte.managers.PreferenceManager;
 import com.example.coeus.coeus_writetobyte.models.GMailUser;
@@ -26,10 +24,6 @@ import com.example.coeus.coeus_writetobyte.utils.ImageHelper;
 import com.tom_roush.pdfbox.pdmodel.font.PDFont;
 import com.tom_roush.pdfbox.pdmodel.font.PDType1Font;
 import com.tom_roush.pdfbox.util.PDFBoxResourceLoader;
-import android.support.annotation.Nullable;
-import com.example.coeus.coeus_writetobyte.R;
-import com.example.coeus.coeus_writetobyte.activities.MainActivity;
-import com.example.coeus.coeus_writetobyte.utils.GlideApp;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -42,9 +36,6 @@ import proccessingPackage.IO;
 
 public class EditingActivity extends AppCompatActivity {
 
-    public static final String EXTRA_FILE_NAME = "fileName";
-
-    private boolean isFileLocationSet = false;
     private String capturedImagePath;
     private Realm realm;
     String visionText = null;

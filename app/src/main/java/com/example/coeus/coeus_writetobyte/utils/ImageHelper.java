@@ -13,10 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-/**
- * Created by victor on 1/10/19.
- */
-
 public class ImageHelper {
 
     private String directoryName = "images";

@@ -2,9 +2,6 @@ package com.example.coeus.coeus_writetobyte.realm;
 
 import io.realm.RealmObject;
 
-/**
- * Created by victor on 1/11/19.
- */
 
 public class ScannedDataFile extends RealmObject {
 

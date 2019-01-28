@@ -23,30 +23,6 @@ public class IO
 
     public static boolean folderCreated = false;
 
-    private static FileOutputStream fos;
-
-    //Function: create a file in a folder
-//    public static boolean createFileInFolder(String fileName) {
-//        if (isExternalStorageWritable()) {
-//            String path = Environment.getExternalStorageDirectory() + "/" + "OCR Documents";
-//            File folder = new File(path);
-//            if (!folder.exists()) {
-//                folder.mkdirs();
-//                folderCreated = true;
-//            }
-//
-//           File txtFile = new File(path, fileName);
-//            try {
-//                fos = new FileOutputStream(txtFile);
-//                return true;
-//            } catch (IOException e) {
-//                System.out.println("failed");
-//                return false;
-//            }
-//        } else
-//            return false;
-//    }
-
     public static File getExternalStorageDir(Context context) {
         // Get the directory in external storage of the app.
 

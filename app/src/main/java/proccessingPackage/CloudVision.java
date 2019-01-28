@@ -1,5 +1,5 @@
 package proccessingPackage;
-import android.app.Application;
+
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
@@ -20,11 +20,7 @@ import com.google.protobuf.ByteString;
 import com.google.cloud.vision.v1p3beta1.Feature;
 
 
-
-import org.apache.commons.io.FileUtils;
-
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;

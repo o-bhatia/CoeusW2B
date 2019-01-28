@@ -1,9 +1,5 @@
 package com.example.coeus.coeus_writetobyte.utils;
 
-/**
- * Created by victor on 1/11/19.
- */
-
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;
 

@@ -1,9 +1,5 @@
 package com.example.coeus.coeus_writetobyte.utils;
 
-/**
- * Created by victor on 1/11/19.
- */
-
 public class Constants {
 
     public static final int POSITION_HOME = 0;

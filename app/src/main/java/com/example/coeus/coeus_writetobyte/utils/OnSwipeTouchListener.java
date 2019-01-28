@@ -1,9 +1,5 @@
 package com.example.coeus.coeus_writetobyte.utils;
 
-/**
- * Created by victor on 1/13/19.
- */
-
 import android.content.Context;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
