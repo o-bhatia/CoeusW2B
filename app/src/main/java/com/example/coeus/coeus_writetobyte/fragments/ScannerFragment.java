@@ -120,7 +120,6 @@ public class ScannerFragment extends Fragment {
 
                 // Save a file: path for use with ACTION_VIEW intents
                 mCurrentPhotoPath = image.getAbsolutePath();
-                Log.d("Aumio", mCurrentPhotoPath);
                 return image; //returns created file
             }
 
@@ -239,8 +238,9 @@ public class ScannerFragment extends Fragment {
                         compressedImage = Bitmap.createScaledBitmap(capturedImage, 200, 200, false);
                         showPictureImageView.setImageBitmap(compressedImage);
                         captureButton.setText(R.string.done);
+                        //call Vision API
                         visionText = CloudVision.readText(inputData, true, this.getContext());
-                        Log.d("Vision2", visionText);
+
 
                     }
 

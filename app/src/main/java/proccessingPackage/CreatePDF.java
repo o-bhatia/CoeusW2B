@@ -35,86 +35,23 @@ import java.util.List;
 public class CreatePDF {
 
     /*
-    Creates document from string of full text, preliminary application usage
-    @params: String of the full text (no newline character), string of the file name, font, font size
-
-    public static PDDocument writeToDoc (String text, String fileName, PDFont font, float fontSize) {
-        PDDocument doc = new PDDocument();
-        PDPage page = new PDPage();
-        doc.addPage(page);
-        List<String> lines = new ArrayList<>();
-        String currentLine = "";
-
-        PDRectangle mediaBox = page.getMediaBox();
-        float margin = 72;
-        float width = mediaBox.getWidth() - 2*margin;
-        float startX = mediaBox.getLowerLeftX() + margin;
-        float startY = mediaBox.getUpperRightY() - margin;
-        int thisWidth = 0;
-        float leading = 1.5f * fontSize;
-
-        String[] words = text.split(" ");
-
-        for (String word: words) {
-
-            if (!currentLine.isEmpty()) { currentLine += " "; }
-
-            try {thisWidth = (int) (fontSize*font.getStringWidth(currentLine + word)/1000);} catch (IOException e){}
-
-            if (thisWidth > width) {
-                lines.add(currentLine);
-
-                currentLine = word;
-            } else {
-                currentLine += word;
-            }
-        }
-
-        lines.add(currentLine);
-
-        try {
-
-            PDPageContentStream content = new PDPageContentStream(doc, page);
-
-            content.beginText();
-            content.setFont(font, fontSize);
-            content.setLeading(leading);
-            content.newLineAtOffset(startX, startY);
-
-
-
-            for (String line : lines) {
-                content.showText(line);
-                content.newLineAtOffset(0, -leading);
-            }
-
-            content.endText();
-            content.close();
-
-
-        } catch (Exception e) {e.printStackTrace();}
-
-        try {
-            doc.save(fileName + ".pdf");
-        } catch (IOException e) {}
-
-        try {
-            doc.close();
-        } catch (IOException e) {}
-
-        Log.d("PDF", "Document created");
-
-        return doc;
-    }
-    */
-
+    Method to write text to a PDF document
+    @Params:
+        text: text to be written
+        fileName: filename of document
+        font: user's requested font
+        fontSize: user's requested font size
+        root: directory to save document
+     */
     public static void write (String text, String fileName,  PDFont font, float fontSize, File root) {
+        //initialize variables
         PDDocument document = new PDDocument();
         PDPage page = new PDPage();
         document.addPage(page);
         List<String> lines = new ArrayList<>();
         String currentLine = "";
 
+        //create page dimensions (ie margins, width for writing)
         PDPageContentStream contentStream;
         PDRectangle mediaBox = page.getMediaBox();
         float margin = 72;
@@ -122,11 +59,12 @@ public class CreatePDF {
         float startX = mediaBox.getLowerLeftX() + margin;
         float startY = mediaBox.getUpperRightY() - margin;
         int thisWidth = 0;
-        float leading = 1.5f * fontSize;
+        float leading = 1.5f * fontSize; //spacing between lines
 
-        Log.d("TEST", "formatting text");
+        //split text into words
         String[] words = text.split(" ");
 
+        //create lines of an acceptable width
         for (String word : words) {
 
             if (!currentLine.isEmpty()) {
@@ -150,7 +88,6 @@ public class CreatePDF {
 
         lines.add(currentLine);
 
-        Log.d("TEST", "Starting stream");
 
         try {
             // Define a content stream for adding to the PDF
@@ -163,8 +100,7 @@ public class CreatePDF {
 
             for (String line : lines) {
 
-                Log.d("TEST", line);
-
+                //check if line has a newline character, which is unrecognized by this library
                 if (!line.contains("\n")) {
                     contentStream.showText(line);
                     contentStream.newLineAtOffset(0, -leading);
@@ -177,7 +113,7 @@ public class CreatePDF {
                     }
                 }
             }
-
+            //close content stream
             contentStream.endText();
             contentStream.close();
 
@@ -186,10 +122,10 @@ public class CreatePDF {
             e.printStackTrace();
         }
 
+        //save file to specified directory
         try {
             String path = root.getAbsolutePath() + "/";
             document.save(path + fileName + ".pdf");
-            Log.d("PDF", "document saved to " + path + fileName + ".pdf");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -199,7 +135,6 @@ public class CreatePDF {
         } catch (IOException e) {
         }
 
-        Log.d("PDF", "Document created");
 
     }
 }

@@ -109,7 +109,7 @@ public class EditingActivity extends AppCompatActivity {
 
     }
 
-
+    //method to get text scanned from image from previous activity
     private String getVisionText() {
 
         Intent incomingIntent = getIntent();
@@ -124,25 +124,31 @@ public class EditingActivity extends AppCompatActivity {
             try {
 
 
-
+                    //getting number of documents created already
                     int filesCount = PreferenceManager.getFilesCount(getApplicationContext());
                     filesCount++;
                     PreferenceManager.saveFilesCount(getApplicationContext(), filesCount);
 
+                    //getting filename
                     fileName = fileNameEditText.getText().toString();
                     if (fileName.isEmpty()) {
                         fileName = "Document" + String.valueOf(filesCount);
                     }
 
+                    //getting values from spinners
                     PDFParams params = getPDFParams();
 
                     PDFont font = params.font;
                     int fontSize = params.textSize;
 
+                    //getting folder directory
                     File root = IO.getExternalStorageDir(getApplicationContext());
                     PDFBoxResourceLoader.init(getApplicationContext());
                     try {
+                        //create doc
                         CreatePDF.write(visionText, fileName, font, fontSize, root);
+
+                        //saving data with realm
                         realm.beginTransaction();
 
                         ScannedDataFile scannedDataFile = realm.createObject(ScannedDataFile.class); // Create a new object
@@ -155,7 +161,7 @@ public class EditingActivity extends AppCompatActivity {
 
                         realm.commitTransaction();
 
-                        Log.i("Success", "2");
+
 
                         (EditingActivity.this).setResult(RESULT_OK);
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -164,13 +170,14 @@ public class EditingActivity extends AppCompatActivity {
                         capturedImage.recycle();
                         finish();
                     } catch (Exception e) {
+                        //if CreatePDF fails
                         Toast.makeText(getApplicationContext(), "Urecognizable symbol found, returning to home screen", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(intent);
                         capturedImage.recycle();
                         finish();
                     }
-                    Log.i("Success", "1");
+
 
 
             } catch (Exception e) {
@@ -249,12 +256,13 @@ public class EditingActivity extends AppCompatActivity {
         textSizesSpinner.setOnItemSelectedListener(textSizesItemSelectedListener);
 
     }
-
+    //method to get values of spinners
     public PDFParams getPDFParams () {
 
         return new PDFParams(fontsSpinner.getSelectedItem().toString(), textSizesSpinner.getSelectedItem().toString());
     }
 
+    //class that handles taking inputs in spinners and converting them to values for CreatePDF class
     private static class PDFParams {
         int textSize;
         PDFont font;
@@ -277,9 +285,6 @@ public class EditingActivity extends AppCompatActivity {
                     break;
             }
 
-
-            Log.d("font", Integer.toString(textSize));
-            Log.d("font", text);
 
         }
     }
